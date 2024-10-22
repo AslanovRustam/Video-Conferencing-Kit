@@ -1,0 +1,67 @@
+@use "@/styles/mixin.scss" as m;
+
+.section {
+  @include m.flex-center-column;
+  gap: var(--Spacing-5, 24px);
+}
+.videoContainer {
+  @include m.flex-center-column;
+  position: relative;
+  width: 480px;
+  height: 328px;
+  border-radius: var(--Radius-2, 16px);
+  background: var(--Surface-Dim, #11131c);
+  overflow: hidden;
+}
+
+.micContainer {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  width: var(--32-px-2-rem-spacing-07, 32px);
+  height: var(--32-px-2-rem-spacing-07, 32px);
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--Secondary-Dim, #253046);
+  cursor: pointer;
+}
+.defaultName {
+  display: flex;
+  width: 88px;
+  height: 88px;
+  padding: var(--Spacing-3, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--Spacing-3, 12px);
+  border-radius: 80px;
+  background: #8744f3;
+}
+.name {
+  color: var(--Base-White, #fff);
+  text-align: center;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 40px;
+  text-transform: capitalize;
+}
+.micro {
+  width: 24px;
+  cursor: pointer;
+}
+
+.settingsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.list {
+  @include m.flex-center-row;
+  gap: var(--Spacing-4, 16px);
+}
+.video {
+  position: absolute;
+  width: 100%;
+}

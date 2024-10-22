@@ -1,0 +1,27 @@
+@use "@/styles/mixin.scss" as m;
+
+.section,
+.titleContainer {
+  @include m.flex-center-column;
+}
+.section {
+  gap: var(--Spacing-7, 40px);
+}
+.titleContainer {
+  gap: var(--padding-2);
+}
+.badge {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: var(--On-Surface-High, #eff0fc);
+  text-align: center;
+  padding: var(--padding-2);
+  border-radius: var(--Radius-5, 40px);
+  border: 1px solid var(--Border-Default, #1d1f29);
+  background: var(--Surface-Default, #191b25);
+}
+.innerText {
+  padding: 0 var(--padding-2);
+}

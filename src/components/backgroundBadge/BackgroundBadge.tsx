@@ -1,7 +1,12 @@
 import s from "./backgroundBadge.module.scss";
 import IconBg from "../../assets/bg.svg";
 
-function BackgroundBadge({ isBgSelect, onClick }) {
+interface BackgroundBadgeProps {
+  onClick: () => void;
+  isBgSelect: boolean;
+}
+
+function BackgroundBadge({ isBgSelect, onClick }: BackgroundBadgeProps) {
   return (
     <div className={s.container}>
       <IconBg

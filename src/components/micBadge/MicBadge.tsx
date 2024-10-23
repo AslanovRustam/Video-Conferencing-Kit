@@ -3,7 +3,12 @@ import MicOff from "../../assets/MicOff.svg";
 import MicOn from "../../assets/MicOn.svg";
 import Dots from "../../assets/Dots-Vertical.svg";
 
-function MicBadge({ isMicOn, onClick }) {
+interface MicBadgeProps {
+  onClick: () => Promise<void>;
+  isMicOn: boolean;
+}
+
+function MicBadge({ isMicOn, onClick }: MicBadgeProps) {
   return (
     <div className={s.container}>
       {isMicOn ? (

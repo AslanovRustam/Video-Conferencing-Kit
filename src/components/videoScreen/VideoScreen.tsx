@@ -17,10 +17,10 @@ import NameComponent from "../nameComponent/NameComponent";
 import { useRef, useState } from "react";
 
 function VideoScreen() {
-  const [error, setError] = useState(null);
-  const [micStream, setMicStream] = useState(null); // Сохраняем стрим для микрофона
-  const [cameraStream, setCameraStream] = useState(null); // Сохраняем стрим для камеры
-  const videoRef = useRef(null);
+  const [error, setError] = useState<null | string>(null);
+  const [micStream, setMicStream] = useState<MediaStream | null>(null);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const dispatch = useDispatch();
   const isMicOn = useSelector(selectMicoOn);
   const isCameraOn = useSelector(selectCameraOn);
@@ -115,7 +115,7 @@ function VideoScreen() {
             <BackgroundBadge isBgSelect={isBgSelect} onClick={handleBgClick} />
           </li>
         </ul>
-        <SettingsBadge />
+        <SettingsBadge onClick={handleMicClick} />
       </div>
       <NameComponent />
     </section>

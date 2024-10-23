@@ -3,7 +3,12 @@ import CameraOff from "../../assets/cameraOff.svg";
 import CameraOn from "../../assets/cameraOn.svg";
 import Dots from "../../assets/Dots-Vertical.svg";
 
-function CameraBadge({ isCameraOn, onClick }) {
+interface CameraBadgeProps {
+  onClick: () => Promise<void>;
+  isCameraOn: boolean;
+}
+
+function CameraBadge({ isCameraOn, onClick }: CameraBadgeProps) {
   return (
     <div className={s.container}>
       {isCameraOn ? (

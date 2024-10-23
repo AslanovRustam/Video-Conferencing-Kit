@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Button from "../button/Button";
 import GoLive from "../../assets/radio.svg";
 import s from "./nameComponent.module.scss";
@@ -13,7 +13,7 @@ function NameComponent() {
   const basicSettings = useSelector(selectBasicSettings);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (basicSettings.camera && basicSettings.microphoneOn) {
       console.log("qwe");

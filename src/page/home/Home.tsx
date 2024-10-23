@@ -1,4 +1,3 @@
-import React from "react";
 import Title from "../../components/title/Title";
 import s from "./home.module.scss";
 import SubTitle from "../../components/subTitle/SubTitle";

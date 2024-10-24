@@ -6,6 +6,7 @@ import ModalWrapper from "../modalWrapper/ModalWrapper";
 import SubTitle from "../subTitle/SubTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { selectBasicSettings } from "../../redux/selectors";
+import { setUser } from "../../redux/userSlice";
 
 function NameComponent() {
   const [name, setName] = useState("");
@@ -16,7 +17,7 @@ function NameComponent() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (basicSettings.camera && basicSettings.microphoneOn) {
-      console.log("qwe");
+      dispatch(setUser(name));
     }
     setShowModal(!showModal);
   };
@@ -24,7 +25,6 @@ function NameComponent() {
   const togleModal = () => {
     setShowModal(!showModal);
   };
-  console.log(basicSettings);
 
   return (
     <>

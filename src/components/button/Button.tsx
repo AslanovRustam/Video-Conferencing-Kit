@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { IButtonType } from "../../types/interfaces";
 import s from "./button.module.scss";
 
 interface ButtonProps {
@@ -6,7 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
   transparent?: boolean;
   children?: ReactNode;
-  type?: "button" | "submit" | "reset";
+  type?: IButtonType;
 }
 
 function Button({

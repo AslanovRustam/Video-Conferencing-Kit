@@ -106,7 +106,12 @@ function VideoScreen() {
       <div className={s.settingsContainer}>
         <ul className={s.list}>
           <li className={s.item}>
-            <MicBadge isMicOn={isMicOn} onClick={handleMicClick} />
+            <MicBadge
+              isMicOn={isMicOn}
+              onClick={handleMicClick}
+              micStream={micStream}
+              setMicStream={setMicStream}
+            />
           </li>
           <li className={s.item}>
             <CameraBadge isCameraOn={isCameraOn} onClick={handleCameraClick} />

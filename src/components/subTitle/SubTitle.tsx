@@ -1,7 +1,7 @@
-import { TitleProps } from "../../types/interfaces";
+import { ITitleProps } from "../../types/interfaces";
 import s from "./subTitle.module.scss";
 
-function SubTitle({ text }: TitleProps) {
+function SubTitle({ text }: ITitleProps) {
   return <p className={s.text}>{text}</p>;
 }
 

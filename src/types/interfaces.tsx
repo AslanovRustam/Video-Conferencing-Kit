@@ -1,21 +1,21 @@
-export interface TitleProps {
+export interface ITitleProps {
   text: string;
 }
 
-export interface BasicSettings {
+export interface IBasicSettings {
   microphoneOn: boolean;
   camera: boolean;
   background: boolean;
 }
 
-export interface DeviceSettings {
+export interface IDeviceSettings {
   microphone: string;
   video: string;
   loudness: string;
   speakers: string;
 }
 
-export interface NotificationSettings {
+export interface INotificationSettings {
   peerJoined: boolean;
   peerLeave: boolean;
   newMessage: boolean;
@@ -23,8 +23,21 @@ export interface NotificationSettings {
   error: boolean;
 }
 
-export interface SettingsState {
-  basic: BasicSettings;
-  device: DeviceSettings;
-  notifications: NotificationSettings;
+export interface ISettingsState {
+  basic: IBasicSettings;
+  device: IDeviceSettings;
+  notifications: INotificationSettings;
 }
+
+export type IItemAny =
+  | string
+  | number
+  | boolean
+  | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  | Iterable<React.ReactNode>
+  | React.ReactPortal
+  | null
+  | undefined
+  | any;
+
+export type IButtonType = "button" | "submit" | "reset";

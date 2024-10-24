@@ -1,0 +1,43 @@
+@use "@/styles/mixin.scss" as m;
+
+.form {
+  @include m.flex-center-row;
+  justify-content: space-between;
+  width: 100%;
+}
+.input {
+  width: 68.7%;
+  display: flex;
+  height: var(--48-px-3-rem-spacing-09, 48px);
+  padding: var(--Spacing-3, 12px) var(--Spacing-4, 16px);
+  align-items: center;
+  gap: var(--Spacing-4, 16px);
+  align-self: stretch;
+  border-radius: var(--Radius-1, 8px);
+  background: var(--Surface-Default, #191b25);
+  color: var(--On-Surface-High, #eff0fc);
+  /* Desktop/Body 1-Regular-16px */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.icon {
+  width: 24px;
+}
+.modalContent {
+  display: flex;
+  width: 380px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 12px;
+  background: var(--Surface-Default, #191b25);
+}
+.btnContainer {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 16px;
+}

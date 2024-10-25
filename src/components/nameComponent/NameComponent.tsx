@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/Button";
 import ModalWrapper from "../modalWrapper/ModalWrapper";
@@ -8,22 +8,36 @@ import { setUser } from "../../redux/userSlice";
 import GoLive from "../../assets/icons/radio.svg";
 import s from "./nameComponent.module.scss";
 
-function NameComponent() {
+interface ModalWrapperProps {
+  checkPermissions: () => Promise<void>;
+  showModalPremissions: boolean;
+  setShowModalPremissions: Dispatch<SetStateAction<boolean>>;
+}
+
+function NameComponent({
+  checkPermissions,
+  showModalPremissions,
+  setShowModalPremissions,
+}: ModalWrapperProps) {
   const [name, setName] = useState("");
-  const [showModal, setShowModal] = useState(false);
   const basicSettings = useSelector(selectBasicSettings);
   const dispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (basicSettings.camera && basicSettings.microphoneOn) {
-      dispatch(setUser(name));
+    console.log("handleSubmit");
+
+    if (!basicSettings.camera || !basicSettings.microphoneOn) {
+      setShowModalPremissions(true);
+      return;
     }
-    setShowModal(!showModal);
+    checkPermissions();
+    dispatch(setUser(name));
+    setName("");
   };
 
   const togleModal = (): void => {
-    setShowModal(!showModal);
+    setShowModalPremissions(!showModalPremissions);
   };
 
   return (
@@ -38,14 +52,14 @@ function NameComponent() {
           <GoLive className={s.icon} />
         </Button>
       </form>
-      {showModal && (
+      {showModalPremissions && (
         <ModalWrapper>
           <div className={s.modalContent}>
             <p className={s.title}>Allow to use your microphone and camera</p>
             <SubTitle text="Access to Microphone and Camera is required. Enable permissions for Microphone and Camera by clicking “Allow” on the pop-up." />
             <div className={s.btnContainer}>
               <Button text={"Dismiss"} transparent onClick={togleModal} />
-              <Button text={"Retry"} onClick={togleModal} />
+              <Button text={"Retry"} onClick={checkPermissions} />
             </div>
           </div>
         </ModalWrapper>

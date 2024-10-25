@@ -7,10 +7,9 @@ interface ModalWrapperProps {
 }
 
 function ModalWrapper({ children }: ModalWrapperProps) {
-  const modalRootRef = useRef<HTMLDivElement | null>(null);
+  const modalRootRef = useRef(document.getElementById("modal"));
 
   useEffect(() => {
-    modalRootRef.current = document.getElementById("modal") as HTMLDivElement;
     document.body.classList.add(s.overvlow);
     return () => {
       document.body.classList.remove(s.overvlow);
@@ -22,15 +21,16 @@ function ModalWrapper({ children }: ModalWrapperProps) {
   }
 
   return createPortal(
-    <div
-      className={s.modalBackDrop}
-      //   className={`${s.modalBackDrop} ${showModal ? s.show : ""}`}
-      //   onClick={() => console.log("close")}
-    >
-      {children}
-    </div>,
+    <div className={s.modalBackDrop}>{children}</div>,
     modalRootRef.current
   );
 }
 
 export default ModalWrapper;
+// <div
+//   className={s.modalBackDrop}
+//     className={`${s.modalBackDrop} ${showModal ? s.show : ""}`}
+//     onClick={() => console.log("close")}
+// >
+//   {children}
+// </div>,

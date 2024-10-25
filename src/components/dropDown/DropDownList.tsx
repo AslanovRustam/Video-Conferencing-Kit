@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, type FC } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, FC } from "react";
 import { IAudioDevice } from "../../types/streamDevice";
 import Check from "../../assets/icons/check.svg";
 import s from "./dropDown.module.scss";
@@ -22,16 +22,12 @@ const DropDownList: FC<DropDownListProps> = ({
     const handler = (e: MouseEvent): void => {
       if (
         dropDownRef.current &&
-        !dropDownRef.current.contains(e.target as Node) &&
-        showMenu
+        !dropDownRef.current.contains(e.target as Node)
       ) {
-        setShowMenu((prev) => !prev);
-      } else if (showMenu) {
-        console.log("showMenu false");
-
         setShowMenu(false);
       }
     };
+
     document.addEventListener("click", handler);
     return () => {
       document.removeEventListener("click", handler);
@@ -39,8 +35,8 @@ const DropDownList: FC<DropDownListProps> = ({
   }, []);
 
   return (
-    <ul className={`${s.list} ${showMenu && s.show}`} ref={dropDownRef}>
-      {items?.map((item: IAudioDevice) => (
+    <ul className={`${s.list} ${showMenu ? s.show : ""}`} ref={dropDownRef}>
+      {items.map((item: IAudioDevice) => (
         <li
           className={s.item}
           key={item.deviceId}

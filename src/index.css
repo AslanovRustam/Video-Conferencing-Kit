@@ -3,6 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Loader */
+  --blue: #2572ed;
+
   /* Primary */
   --Primary-Default: #0076fe;
   --Primary-Bright: #0091ff;

@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import IconComponent from "../iconComponent/IconComponent";
 import DropDownList from "../dropDown/DropDownList";
 import { IAudioDevice } from "../../types/streamDevice";
@@ -74,14 +80,15 @@ function MicBadge({
     }
   };
 
-  const togleMenuClick = (): void => {
+  const togleMenuClick = (e: MouseEvent): void => {
+    e.stopPropagation();
     setShowMenu(!showMenu);
   };
-  console.log("showMenu", showMenu);
+  // console.log("showMenu", showMenu);
 
   return (
     <>
-      <div className={s.container}>
+      <div className={`${s.container} ${isMicOn && s.active}`}>
         {isMicOn ? (
           <IconComponent iconName="MicOn" onClick={onClick} />
         ) : (

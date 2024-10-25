@@ -5,6 +5,8 @@ import CameraBadge from "../cameraBadge/CameraBadge";
 import BackgroundBadge from "../backgroundBadge/BackgroundBadge";
 import SettingsBadge from "../settingsBadge/SettingsBadge";
 import NameComponent from "../nameComponent/NameComponent";
+import Loader from "../loader/Loader";
+import ModalWrapper from "../modalWrapper/ModalWrapper";
 import { setBasicSettings } from "../../redux/settingsSlice";
 import {
   selectCameraOn,
@@ -14,12 +16,15 @@ import {
 } from "../../redux/selectors";
 import MicOn from "../../assets/icons/MicOn.svg";
 import MicOff from "../../assets/icons/MicOff.svg";
+import Avatar from "../../assets/icons/avatar.svg";
 import s from "./videoScreen.module.scss";
 
 function VideoScreen() {
   const [error, setError] = useState<null | string>(null);
   const [micStream, setMicStream] = useState<MediaStream | null>(null);
   const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [showModalPremissions, setShowModalPremissions] = useState(false);
+  const [isGoingLife, setIsGoingLife] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const dispatch = useDispatch();
   const isMicOn = useSelector(selectMicoOn);
@@ -86,9 +91,43 @@ function VideoScreen() {
     dispatch(setBasicSettings({ background: !isBgSelect }));
   };
 
+  const checkPermissions = async (): Promise<void> => {
+    console.log("checkPermissions");
+
+    if (navigator.permissions) {
+      try {
+        const micStream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        const camStream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        console.log("try");
+
+        setMicStream(micStream);
+        setCameraStream(camStream);
+
+        console.log("Разрешение на доступ к камере и микрофону предоставлено.");
+
+        dispatch(setBasicSettings({ microphoneOn: true, camera: true }));
+        setShowModalPremissions(false);
+        setIsGoingLife(true);
+        if (videoRef.current) {
+          videoRef.current.srcObject = camStream;
+        }
+      } catch (error) {
+        console.log("Доступ к камере или микрофону запрещен.");
+      }
+    } else {
+      console.log("API разрешений не поддерживается этим браузером.");
+    }
+  };
+  console.log("micStream", micStream);
+  console.log("cameraStream", cameraStream);
+
   return (
     <section className={s.section}>
-      <div className={s.videoContainer}>
+      <div className={`${s.videoContainer} ${isGoingLife && s.isGoingLife}`}>
         <video ref={videoRef} autoPlay playsInline className={s.video} />
         <button
           type="button"
@@ -102,7 +141,11 @@ function VideoScreen() {
           )}
         </button>
         <div className={s.defaultName}>
-          <span className={s.name}>{name}</span>
+          {name ? (
+            <span className={s.name}>{name}</span>
+          ) : (
+            <Avatar className={s.avatar} />
+          )}
         </div>
       </div>
       <div className={s.settingsContainer}>
@@ -122,9 +165,21 @@ function VideoScreen() {
             <BackgroundBadge isBgSelect={isBgSelect} onClick={handleBgClick} />
           </li>
         </ul>
-        <SettingsBadge onClick={handleMicClick} />
+        <SettingsBadge />
       </div>
-      <NameComponent />
+      <NameComponent
+        checkPermissions={checkPermissions}
+        showModalPremissions={showModalPremissions}
+        setShowModalPremissions={setShowModalPremissions}
+      />
+      {isGoingLife && (
+        <ModalWrapper>
+          <div className={s.loaderContainer}>
+            <Loader />
+            <p className={s.loaderText}>Going live...</p>
+          </div>
+        </ModalWrapper>
+      )}
     </section>
   );
 }

@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useRef, type FC } from "react";
+import { IAudioDevice } from "../../types/streamDevice";
+import Check from "../../assets/icons/check.svg";
 import s from "./dropDown.module.scss";
-import { IItemAny } from "../../types/interfaces";
-import Check from "../../assets/check.svg";
 
 interface DropDownListProps {
-  items: any;
+  items: IAudioDevice[];
   onClick: (deviceId: string) => Promise<void>;
   showMenu: boolean;
   setShowMenu: Dispatch<SetStateAction<boolean>>;
@@ -16,13 +16,13 @@ const DropDownList: FC<DropDownListProps> = ({
   showMenu,
   setShowMenu,
 }) => {
-  const droptDownRef = useRef<HTMLUListElement>(null);
+  const dropDownRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
+    const handler = (e: MouseEvent): void => {
       if (
-        droptDownRef.current &&
-        !droptDownRef.current.contains(e.target as Node) &&
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target as Node) &&
         showMenu
       ) {
         setShowMenu((prev) => !prev);
@@ -39,8 +39,8 @@ const DropDownList: FC<DropDownListProps> = ({
   }, []);
 
   return (
-    <ul className={`${s.list} ${showMenu && s.show}`} ref={droptDownRef}>
-      {items?.map((item: IItemAny) => (
+    <ul className={`${s.list} ${showMenu && s.show}`} ref={dropDownRef}>
+      {items?.map((item: IAudioDevice) => (
         <li
           className={s.item}
           key={item.deviceId}

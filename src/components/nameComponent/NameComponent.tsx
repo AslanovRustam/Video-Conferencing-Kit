@@ -1,12 +1,12 @@
 import { FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/Button";
-import GoLive from "../../assets/radio.svg";
-import s from "./nameComponent.module.scss";
 import ModalWrapper from "../modalWrapper/ModalWrapper";
 import SubTitle from "../subTitle/SubTitle";
-import { useDispatch, useSelector } from "react-redux";
 import { selectBasicSettings } from "../../redux/selectors";
 import { setUser } from "../../redux/userSlice";
+import GoLive from "../../assets/icons/radio.svg";
+import s from "./nameComponent.module.scss";
 
 function NameComponent() {
   const [name, setName] = useState("");
@@ -14,7 +14,7 @@ function NameComponent() {
   const basicSettings = useSelector(selectBasicSettings);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (basicSettings.camera && basicSettings.microphoneOn) {
       dispatch(setUser(name));
@@ -22,7 +22,7 @@ function NameComponent() {
     setShowModal(!showModal);
   };
 
-  const togleModal = () => {
+  const togleModal = (): void => {
     setShowModal(!showModal);
   };
 

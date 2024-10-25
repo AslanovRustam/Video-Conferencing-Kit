@@ -1,5 +1,5 @@
+import IconComponent from "../iconComponent/IconComponent";
 import s from "./backgroundBadge.module.scss";
-import IconBg from "../../assets/bg.svg";
 
 interface BackgroundBadgeProps {
   onClick: () => void;
@@ -9,9 +9,10 @@ interface BackgroundBadgeProps {
 function BackgroundBadge({ isBgSelect, onClick }: BackgroundBadgeProps) {
   return (
     <div className={s.container}>
-      <IconBg
-        className={`${s.micro} ${isBgSelect && s.selected}`}
+      <IconComponent
+        iconName="IconBg"
         onClick={onClick}
+        selectedClass={isBgSelect}
       />
     </div>
   );

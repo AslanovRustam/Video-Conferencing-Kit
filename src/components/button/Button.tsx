@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IButtonType } from "../../types/interfaces";
+import { IButtonType } from "../../types/button";
 import s from "./button.module.scss";
 
 interface ButtonProps {

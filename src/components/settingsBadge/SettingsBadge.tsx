@@ -1,5 +1,5 @@
+import IconComponent from "../iconComponent/IconComponent";
 import s from "./settingsBadge.module.scss";
-import IconSettings from "../../assets/setings.svg";
 
 interface BadgeProps {
   onClick: () => void;
@@ -8,7 +8,7 @@ interface BadgeProps {
 function SettingsBadge({ onClick }: BadgeProps) {
   return (
     <div className={s.container}>
-      <IconSettings className={s.micro} onClick={onClick} />
+      <IconComponent iconName="Settings" onClick={onClick} />
     </div>
   );
 }

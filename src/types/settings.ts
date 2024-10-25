@@ -1,7 +1,3 @@
-export interface ITitleProps {
-  text: string;
-}
-
 export interface IBasicSettings {
   microphoneOn: boolean;
   camera: boolean;
@@ -28,16 +24,3 @@ export interface ISettingsState {
   device: IDeviceSettings;
   notifications: INotificationSettings;
 }
-
-export type IItemAny =
-  | string
-  | number
-  | boolean
-  | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-  | Iterable<React.ReactNode>
-  | React.ReactPortal
-  | null
-  | undefined
-  | any;
-
-export type IButtonType = "button" | "submit" | "reset";

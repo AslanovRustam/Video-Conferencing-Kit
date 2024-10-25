@@ -1,4 +1,4 @@
-import { ITitleProps } from "../../types/interfaces";
+import { ITitleProps } from "../../types/text";
 import s from "./subTitle.module.scss";
 
 function SubTitle({ text }: ITitleProps) {

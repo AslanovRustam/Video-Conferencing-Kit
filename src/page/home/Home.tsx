@@ -1,8 +1,8 @@
 import Title from "../../components/title/Title";
-import s from "./home.module.scss";
 import SubTitle from "../../components/subTitle/SubTitle";
-import Logo from "../../assets/logo.svg";
 import VideoScreen from "../../components/videoScreen/VideoScreen";
+import Logo from "../../assets/icons/logo.svg";
+import s from "./home.module.scss";
 
 function Home() {
   return (

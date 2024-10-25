@@ -1,22 +1,23 @@
-import { ReactNode, useEffect } from "react";
-import s from "./modalWrapper.module.scss";
+import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-
-const modalRoot = document.querySelector("#modal");
+import s from "./modalWrapper.module.scss";
 
 interface ModalWrapperProps {
   children: ReactNode;
 }
 
 function ModalWrapper({ children }: ModalWrapperProps) {
+  const modalRootRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
+    modalRootRef.current = document.getElementById("modal") as HTMLDivElement;
     document.body.classList.add(s.overvlow);
     return () => {
       document.body.classList.remove(s.overvlow);
     };
   }, []);
 
-  if (!modalRoot) {
+  if (!modalRootRef.current) {
     return null;
   }
 
@@ -28,7 +29,7 @@ function ModalWrapper({ children }: ModalWrapperProps) {
     >
       {children}
     </div>,
-    modalRoot
+    modalRootRef.current
   );
 }
 

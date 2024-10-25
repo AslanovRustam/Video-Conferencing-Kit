@@ -1,20 +1,20 @@
-import s from "./videoScreen.module.scss";
-import MicOff from "../../assets/MicOff.svg";
-import MicOn from "../../assets/MicOn.svg";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MicBadge from "../micBadge/MicBadge";
+import CameraBadge from "../cameraBadge/CameraBadge";
+import BackgroundBadge from "../backgroundBadge/BackgroundBadge";
+import SettingsBadge from "../settingsBadge/SettingsBadge";
+import NameComponent from "../nameComponent/NameComponent";
+import { setBasicSettings } from "../../redux/settingsSlice";
 import {
   selectCameraOn,
   selectMicoOn,
   selectUser,
   selectBgOn,
 } from "../../redux/selectors";
-import { setBasicSettings } from "../../redux/settingsSlice";
-import MicBadge from "../micBadge/MicBadge";
-import CameraBadge from "../cameraBadge/CameraBadge";
-import BackgroundBadge from "../backgroundBadge/BackgroundBadge";
-import SettingsBadge from "../settingsBadge/SettingsBadge";
-import NameComponent from "../nameComponent/NameComponent";
-import { useRef, useState } from "react";
+import MicOn from "../../assets/icons/MicOn.svg";
+import MicOff from "../../assets/icons/MicOff.svg";
+import s from "./videoScreen.module.scss";
 
 function VideoScreen() {
   const [error, setError] = useState<null | string>(null);
@@ -27,7 +27,7 @@ function VideoScreen() {
   const isBgSelect = useSelector(selectBgOn);
   const name = useSelector(selectUser);
 
-  const handleMicClick = async () => {
+  const handleMicClick = async (): Promise<void> => {
     if (!isMicOn) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -41,6 +41,7 @@ function VideoScreen() {
         setError("Нет доступа к микрофону");
         console.error("Ошибка доступа к микрофону:", err);
       }
+      return;
     } else {
       if (micStream) {
         micStream.getTracks().forEach((track) => track.stop());
@@ -51,7 +52,7 @@ function VideoScreen() {
     }
   };
 
-  const handleCameraClick = async () => {
+  const handleCameraClick = async (): Promise<void> => {
     if (!isCameraOn) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -68,6 +69,7 @@ function VideoScreen() {
         setError("Нет доступа к камере");
         console.error("Ошибка доступа к камере:", err);
       }
+      return;
     } else {
       if (cameraStream) {
         cameraStream.getTracks().forEach((track) => track.stop());
@@ -80,7 +82,7 @@ function VideoScreen() {
     }
   };
 
-  const handleBgClick = () => {
+  const handleBgClick = (): void => {
     dispatch(setBasicSettings({ background: !isBgSelect }));
   };
 

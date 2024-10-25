@@ -1,9 +1,9 @@
-import s from "./micBadge.module.scss";
-import MicOff from "../../assets/MicOff.svg";
-import MicOn from "../../assets/MicOn.svg";
-import Dots from "../../assets/Dots-Vertical.svg";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import IconComponent from "../iconComponent/IconComponent";
 import DropDownList from "../dropDown/DropDownList";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { IAudioDevice } from "../../types/streamDevice";
+import Dots from "../../assets/icons/Dots-Vertical.svg";
+import s from "./micBadge.module.scss";
 
 interface MicBadgeProps {
   onClick: () => Promise<void>;
@@ -12,20 +12,13 @@ interface MicBadgeProps {
   setMicStream: Dispatch<SetStateAction<MediaStream | null>>;
 }
 
-interface AudioDevice {
-  deviceId: string;
-  label: string;
-  kind: MediaDeviceKind;
-  checked: boolean;
-}
-
 function MicBadge({
   isMicOn,
   onClick,
   micStream,
   setMicStream,
 }: MicBadgeProps) {
-  const [devices, setDevices] = useState<AudioDevice[]>([]);
+  const [devices, setDevices] = useState<IAudioDevice[]>([]);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -58,7 +51,7 @@ function MicBadge({
       });
   }, []);
 
-  const handleClick = async (deviceId: string) => {
+  const handleClick = async (deviceId: string): Promise<void> => {
     if (micStream) {
       micStream.getTracks().forEach((track) => track.stop());
     }
@@ -81,7 +74,7 @@ function MicBadge({
     }
   };
 
-  const togleMenuClick = () => {
+  const togleMenuClick = (): void => {
     setShowMenu(!showMenu);
   };
   console.log("showMenu", showMenu);
@@ -90,9 +83,9 @@ function MicBadge({
     <>
       <div className={s.container}>
         {isMicOn ? (
-          <MicOn className={s.micro} onClick={onClick} />
+          <IconComponent iconName="MicOn" onClick={onClick} />
         ) : (
-          <MicOff className={s.micro} onClick={onClick} />
+          <IconComponent iconName="MicOff" onClick={onClick} />
         )}
         <div className={s.divider}></div>
         <Dots className={s.dots} onClick={togleMenuClick} />

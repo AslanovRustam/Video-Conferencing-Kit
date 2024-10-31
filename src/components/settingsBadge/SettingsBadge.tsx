@@ -4,18 +4,23 @@ import s from "./settingsBadge.module.scss";
 import { selectBasicSettings } from "../../redux/selectors";
 import { useState } from "react";
 import ModalWrapper from "../modalWrapper/ModalWrapper";
+import Settings from "../settings/Settings";
 
 interface BadgeProps {
-  // onClick: () => void;
+  cameraStream: MediaStream | null;
+  micStream: MediaStream | null;
 }
-
-function SettingsBadge({}: BadgeProps) {
+interface MicAndCamState {
+  isMicOn: boolean;
+  isCamOn: boolean;
+}
+function SettingsBadge({ cameraStream, micStream }: BadgeProps) {
   const basicSettings = useSelector(selectBasicSettings);
-  const [isMicAndCamOn, setIsMicAndCamOn] = useState({
+  const [isMicAndCamOn, setIsMicAndCamOn] = useState<MicAndCamState>({
     isMicOn: basicSettings.microphoneOn,
     isCamOn: basicSettings.camera,
   });
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const onClick = () => {
     togleModal();
@@ -25,12 +30,18 @@ function SettingsBadge({}: BadgeProps) {
     setShowModal(!showModal);
   };
 
-  console.log(basicSettings);
-
   return (
     <div className={s.container}>
       <IconComponent iconName="Settings" onClick={onClick} />
-      {showModal && <ModalWrapper>jello</ModalWrapper>}
+      {showModal && (
+        <ModalWrapper>
+          <Settings
+            closeModal={onClick}
+            cameraStream={cameraStream}
+            micStream={micStream}
+          />
+        </ModalWrapper>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import s from "./modalWrapper.module.scss";
 
@@ -7,16 +7,25 @@ interface ModalWrapperProps {
 }
 
 function ModalWrapper({ children }: ModalWrapperProps) {
-  const modalRootRef = useRef(document.getElementById("modal"));
+  const [isReady, setIsReady] = useState(false);
+  const modalRootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const newModalRoot = document.createElement("div");
+    newModalRoot.id = "modal";
+    document.body.appendChild(newModalRoot);
+    modalRootRef.current = newModalRoot;
     document.body.classList.add(s.overvlow);
+    setIsReady(true);
     return () => {
       document.body.classList.remove(s.overvlow);
+      if (modalRootRef.current) {
+        document.body.removeChild(modalRootRef.current);
+      }
     };
   }, []);
 
-  if (!modalRootRef.current) {
+  if (!isReady || !modalRootRef.current) {
     return null;
   }
 
@@ -27,10 +36,3 @@ function ModalWrapper({ children }: ModalWrapperProps) {
 }
 
 export default ModalWrapper;
-// <div
-//   className={s.modalBackDrop}
-//     className={`${s.modalBackDrop} ${showModal ? s.show : ""}`}
-//     onClick={() => console.log("close")}
-// >
-//   {children}
-// </div>,

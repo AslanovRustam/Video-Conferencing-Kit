@@ -4,7 +4,7 @@ import {
   IDeviceSettings,
   INotificationSettings,
   ISettingsState,
-} from "../types/interfaces";
+} from "../types/settings";
 
 const initialState: ISettingsState = {
   basic: { microphoneOn: false, camera: false, background: false },

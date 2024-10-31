@@ -92,8 +92,6 @@ function VideoScreen() {
   };
 
   const checkPermissions = async (): Promise<void> => {
-    console.log("checkPermissions");
-
     if (navigator.permissions) {
       try {
         const micStream = await navigator.mediaDevices.getUserMedia({
@@ -102,7 +100,6 @@ function VideoScreen() {
         const camStream = await navigator.mediaDevices.getUserMedia({
           video: true,
         });
-        console.log("try");
 
         setMicStream(micStream);
         setCameraStream(camStream);
@@ -122,8 +119,6 @@ function VideoScreen() {
       console.log("API разрешений не поддерживается этим браузером.");
     }
   };
-  console.log("micStream", micStream);
-  console.log("cameraStream", cameraStream);
 
   return (
     <section className={s.section}>
@@ -159,13 +154,18 @@ function VideoScreen() {
             />
           </li>
           <li className={s.item}>
-            <CameraBadge isCameraOn={isCameraOn} onClick={handleCameraClick} />
+            <CameraBadge
+              isCameraOn={isCameraOn}
+              onClick={handleCameraClick}
+              cameraStream={cameraStream}
+              setCameraStream={setCameraStream}
+            />
           </li>
           <li className={s.item}>
             <BackgroundBadge isBgSelect={isBgSelect} onClick={handleBgClick} />
           </li>
         </ul>
-        <SettingsBadge />
+        <SettingsBadge cameraStream={cameraStream} micStream={micStream} />
       </div>
       <NameComponent
         checkPermissions={checkPermissions}

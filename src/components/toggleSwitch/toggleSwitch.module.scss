@@ -1,0 +1,32 @@
+.toggleSwitch {
+  width: 40px;
+  height: 24px;
+  background-color: transparent;
+  border: 1px solid var(--Surface-Brighter, #2e303a);
+  border-radius: var(--Radius-2, 16px);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.on {
+  background: var(--Primary-Default, #0076fe);
+}
+
+.switchHandle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--Surface-Brighter, #2e303a);
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  left: 6px;
+  transition: left 0.3s;
+}
+.white {
+  background-color: #fff;
+}
+.on .switchHandle {
+  left: 17px;
+}

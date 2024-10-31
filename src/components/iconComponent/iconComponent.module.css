@@ -1,0 +1,9 @@
+.micro {
+  width: 24px;
+  fill: #8f9099;
+  cursor: pointer;
+}
+
+.selected {
+  fill: var(--On-Surface-High);
+}/*# sourceMappingURL=iconComponent.module.css.map */

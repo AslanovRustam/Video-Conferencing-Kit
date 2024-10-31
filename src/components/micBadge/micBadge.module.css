@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  display: flex;
+  padding: var(--padding-2);
+  align-items: center;
+  gap: 9px;
+  border-radius: var(--Radius-1, 8px);
+  max-width: 74px;
+  border: 1px solid var(--Border-Bright, #252a33);
+  transition: var(--transitions);
+}
+.container:hover, .container:focus {
+  background: var(--Surface-Brighter, #2e303a);
+  color: var(--On-Surface-Medium, #c5c6d2);
+}
+
+.active {
+  background: var(--Surface-Dim, #11131c);
+}
+
+.micro {
+  width: 24px;
+  cursor: pointer;
+}
+
+.divider {
+  position: absolute;
+  background-color: var(--Border-Bright, #252a33);
+  width: 1px;
+  height: 100%;
+  left: 50%;
+}
+
+.dots {
+  cursor: pointer;
+}/*# sourceMappingURL=micBadge.module.css.map */

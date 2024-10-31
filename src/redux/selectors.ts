@@ -9,3 +9,7 @@ export const selectMicoOn = (state: RootState) =>
   state.settings.basic.microphoneOn;
 export const selectCameraOn = (state: RootState) => state.settings.basic.camera;
 export const selectBgOn = (state: RootState) => state.settings.basic.background;
+export const selectAudioDevices = (state: RootState) => state.devices.audio;
+export const selectVideoDevices = (state: RootState) => state.devices.video;
+export const selectAudioDevicesOutput = (state: RootState) =>
+  state.devices.audioOutput;

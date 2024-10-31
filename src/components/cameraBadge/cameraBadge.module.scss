@@ -5,8 +5,14 @@
   align-items: center;
   gap: 9px;
   border-radius: var(--Radius-1, 8px);
-  background: var(--Surface-Brighter, #2e303a);
   max-width: 74px;
+  border: 1px solid var(--Border-Bright, #252a33);
+  transition: var(--transitions);
+  &:hover,
+  &:focus {
+    background: var(--Surface-Brighter, #2e303a);
+    color: var(--On-Surface-Medium, #c5c6d2);
+  }
 }
 .micro {
   width: 24px;
@@ -21,4 +27,7 @@
 }
 .dots {
   cursor: pointer;
+}
+.active {
+  background: var(--Surface-Dim, #11131c);
 }

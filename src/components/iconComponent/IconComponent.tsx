@@ -1,22 +1,11 @@
-import type { FC } from "react";
-import MicOff from "../../assets/icons/MicOff.svg";
-import MicOn from "../../assets/icons/MicOn.svg";
-import CameraOff from "../../assets/icons/cameraOff.svg";
-import CameraOn from "../../assets/icons/cameraOn.svg";
-import IconBg from "../../assets/icons/bg.svg";
-import Settings from "../../assets/icons/setings.svg";
+import { SVGProps, useEffect, useState, type FC } from "react";
 import s from "./iconComponent.module.scss";
+import { IconNameType } from "../../types/icons";
 
 interface IconComponentProps {
-  onClick: () => void;
+  onClick?: () => void;
   selectedClass?: boolean;
-  iconName:
-    | "MicOn"
-    | "MicOff"
-    | "CameraOff"
-    | "CameraOn"
-    | "IconBg"
-    | "Settings";
+  iconName: IconNameType;
 }
 
 const IconComponent: FC<IconComponentProps> = ({
@@ -24,13 +13,24 @@ const IconComponent: FC<IconComponentProps> = ({
   iconName,
   selectedClass,
 }) => {
-  const icons = { MicOn, MicOff, CameraOff, CameraOn, IconBg, Settings };
-  const Icon = icons[iconName];
+  const [Icon, setIcon] = useState<FC<SVGProps<SVGSVGElement>> | null>(null);
+
+  useEffect(() => {
+    const loadIcon = async () => {
+      try {
+        const module = await import(`../../assets/icons/${iconName}.svg`);
+        setIcon(() => module.default);
+      } catch (error) {
+        console.error(`Icon ${iconName} not found`, error);
+      }
+    };
+    loadIcon();
+  }, [iconName]);
 
   return Icon ? (
     <Icon
-      className={`${s.micro} ${selectedClass && s.selected}`}
-      onClick={onClick}
+      className={`${s.micro} ${selectedClass ? s.selected : ""}`}
+      onClick={onClick || undefined}
     />
   ) : null;
 };

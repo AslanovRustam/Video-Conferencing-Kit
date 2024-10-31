@@ -18,16 +18,16 @@ const DropDownList: FC<DropDownListProps> = ({
 }) => {
   const dropDownRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent): void => {
-      if (
-        dropDownRef.current &&
-        !dropDownRef.current.contains(e.target as Node)
-      ) {
-        setShowMenu(false);
-      }
-    };
+  const handler = (e: MouseEvent): void => {
+    if (
+      dropDownRef.current &&
+      !dropDownRef.current.contains(e.target as Node)
+    ) {
+      setShowMenu(false);
+    }
+  };
 
+  useEffect(() => {
     document.addEventListener("click", handler);
     return () => {
       document.removeEventListener("click", handler);
@@ -36,16 +36,18 @@ const DropDownList: FC<DropDownListProps> = ({
 
   return (
     <ul className={`${s.list} ${showMenu ? s.show : ""}`} ref={dropDownRef}>
-      {items.map((item: IAudioDevice) => (
-        <li
-          className={s.item}
-          key={item.deviceId}
-          onClick={() => onClick(item.deviceId)}
-        >
-          <p className={s.text}>{item.label}</p>
-          {item.checked && <Check className={s.icon} />}
-        </li>
-      ))}
+      {items.map((item: IAudioDevice) => {
+        return (
+          <li
+            className={s.item}
+            key={item.deviceId}
+            onClick={() => onClick(item.deviceId)}
+          >
+            <p className={s.text}>{item.label}</p>
+            {item.checked && <Check className={s.icon} />}
+          </li>
+        );
+      })}
     </ul>
   );
 };

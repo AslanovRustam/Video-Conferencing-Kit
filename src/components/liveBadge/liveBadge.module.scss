@@ -1,0 +1,38 @@
+@use "@/styles/mixin.scss" as m;
+
+.container {
+  @include m.flex-center-row;
+  padding: var(--padding-2);
+  gap: 6px;
+  border-radius: 20px;
+  border: 1px solid var(--Alert-Error-Default, #ea3054);
+  background: var(--Alert-Error-Default, #ea3054);
+}
+.circle {
+  width: 12px;
+  height: 12px;
+  background: #ffedec;
+  border-radius: 50%;
+  animation: blink 1s ease-in-out infinite;
+}
+.text {
+  color: var(--Alert-Error-Brighter, #ffebec);
+  text-align: center;
+  /* Desktop/Body 2-Semibold-14px */
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

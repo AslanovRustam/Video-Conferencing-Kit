@@ -1,0 +1,64 @@
+@use "@/styles/mixin.scss" as m;
+
+.container {
+  @include m.flex-center-column;
+  position: relative;
+  width: 100%;
+  align-items: flex-start;
+  gap: var(--padding-2);
+}
+.selection,
+.list {
+  width: 100%;
+  display: flex;
+  // height: var(--48-px-3-rem-spacing-09, 48px);
+  padding: var(--Spacing-3, 12px) var(--Spacing-4, 16px);
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--Radius-1, 8px);
+  background: var(--Surface-Bright, #252a33);
+  cursor: pointer;
+}
+.selection {
+}
+.text {
+  margin-left: var(--Spacing-4, 16px);
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.currentSelection {
+  display: flex;
+  align-items: center;
+  width: 90%;
+}
+.list {
+  position: absolute;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.1s ease-in-out;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.show {
+  transform: translateY(8px);
+  opacity: 1;
+  pointer-events: all;
+  height: auto;
+  padding: 0 var(--Spacing-4, 16px);
+}
+.item {
+  width: 100%;
+  padding: var(--Spacing-3, 12px) var(--Spacing-4, 16px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--On-Surface-Low, #8f909b);
+  }
+}

@@ -1,0 +1,16 @@
+export type IconNameType =
+  | "MicOn"
+  | "MicOff"
+  | "CameraOff"
+  | "CameraOn"
+  | "IconBg"
+  | "Settings"
+  | "BellOn"
+  | "Cross"
+  | "check"
+  | "Speakers"
+  | "Alert"
+  | "Chat"
+  | "HandOn"
+  | "PeopleAdd"
+  | "PeopleLeave";

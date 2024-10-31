@@ -1,0 +1,17 @@
+@use "@/styles/mixin.scss" as m;
+
+.section,
+.titleContainer {
+  @include m.flex-center-column;
+}
+.section {
+  gap: var(--Spacing-7, 40px);
+}
+.titleContainer {
+  gap: var(--padding-2);
+}
+
+.sessionComponent {
+  @include m.flex-center-row;
+  gap: 8px;
+}

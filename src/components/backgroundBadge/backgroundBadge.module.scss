@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  display: flex;
+  padding: var(--padding-2);
+  align-items: center;
+  border-radius: var(--Radius-1, 8px);
+  border: 1px solid var(--Border-Bright, #252a33);
+  max-width: 74px;
+}
+.micro {
+  width: 24px;
+  fill: #8f9099;
+  cursor: pointer;
+}
+
+.selected {
+  fill: var(--On-Surface-High);
+}

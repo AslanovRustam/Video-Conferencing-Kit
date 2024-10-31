@@ -1,0 +1,36 @@
+.button {
+  display: flex;
+  height: var(--48-px-3-rem-spacing-09, 48px);
+  padding: var(--padding-2) var(--Spacing-4, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--padding-2);
+  border-radius: var(--Radius-1, 8px);
+  background: var(--Primary-Default, #0076fe);
+  cursor: pointer;
+  transition: var(--transitions);
+  &:hover,
+  &:focus {
+    background: var(--Primary-Bright, #0091ff);
+  }
+}
+
+.transparent {
+  background: transparent;
+  border: 1px solid var(--Secondary-Default, #424956);
+  &:hover,
+  &:focus {
+    background: transparent;
+    border-color: var(--Secondary-Bright, #6c778f);
+  }
+}
+
+.text {
+  color: var(--On-Primary-High, #fff);
+  text-align: center;
+  /* Desktop/Button-Semibold-16px */
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
